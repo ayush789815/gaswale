@@ -167,14 +167,14 @@ console.log("ordersData", ordersData);
             <hr className="my-3 border-gray-200" />
             <div className="flex justify-between items-center">
               <Eye
-                className="text-blue-600 cursor-pointer"
+                className="text-green-500 cursor-pointer"
                 onClick={() => handleClick(order.orderid)}
               />
               {loading == order.orderid ? (
                 <IconLoader />
               ) : (
                 <Repeat
-                  className="text-[#1B0061] cursor-pointer"
+                  className="text-blue-800 cursor-pointer"
                   onClick={() => handlereorder(order?.orderid)}
                 />
               )}

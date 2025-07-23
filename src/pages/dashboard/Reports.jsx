@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { addMonths } from "date-fns";
 import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,13 +18,14 @@ const Reports = () => {
   // const [startDate, setStartDate] = useState(new Date("2025-05-20"));
   // const [endDate, setEndDate] = useState(new Date("2025-06-19"));
   // const [serviceType, setServiceType] = useState("all");
+  
   const [productType, setProductType] = useState("all");
   const [paymentType, setPaymentType] = useState("all");
 
-  const [range, setRange] = useState({
-    startDate: new Date("2025-06-17"),
-    endDate: new Date("2025-07-17"),
-  });
+ const [range, setRange] = useState({
+  startDate: addMonths(new Date(), -1),
+  endDate: new Date(), // 1 month from today
+});
   const userData = JSON.parse(localStorage.getItem("customer"));
 
   const [getReports, { data, isLoading }] = useGetReportsMutation();
@@ -158,7 +159,7 @@ const Reports = () => {
             {currentReports?.map((order, idx) => (
               <tr key={idx} className="border-b hover:bg-gray-50 transition-colors">
                 <td className="p-3">{order.orderid}</td>
-                <td className="p-3">{order.paymentmode}</td>
+                <td className="p-3 text-green-500">{order.paymentmode}</td>
                 <td className="p-3">{order.orderstatustext}</td>
                 <td className="p-3 whitespace-pre-wrap">
                   {order?.productslist ? (
@@ -188,7 +189,7 @@ const Reports = () => {
           <div key={idx} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
             <div className="flex justify-between items-start mb-3">
               <div>
-                <h3 className="font-semibold text-gray-900">{order.orderid}</h3>
+                <h3 className="font-semibold text-gray-900">#{order.orderid}</h3>
                 <p className="text-sm text-gray-600">{order.datetime}</p>
               </div>
               <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
@@ -197,17 +198,7 @@ const Reports = () => {
             </div>
             
             <div className="space-y-2 mb-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Payment:</span>
-                <span className="text-sm font-medium">{order.paymentmode}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Total:</span>
-                <span className="text-sm font-semibold text-green-600">{formatPrice(order.totalamount)}</span>
-              </div>
-            </div>
-            
-            <div className="border-t pt-3">
+                <div className="border-t pt-3">
               <p className="text-sm text-gray-600 mb-2">Products:</p>
               <div className="text-sm">
                 {order?.productslist ? (
@@ -225,6 +216,17 @@ const Reports = () => {
                 )}
               </div>
             </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600">Payment:</span>
+                <span className="text-sm font-medium">{order.paymentmode}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-600">Total:</span>
+                <span className="text-sm font-semibold text-green-600">{formatPrice(order.totalamount)}</span>
+              </div>
+            </div>
+            
+          
           </div>
         ))}
       </div>

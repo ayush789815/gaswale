@@ -103,7 +103,7 @@ const UserIDPassword = () => {
         const res = await updateContactDetails(payload).unwrap();
 
         if (res.success) {
-          toast.success("✅ Contact details updated successfully");
+          toast.success("Contact details updated successfully");
           setEditable(false);
           setOtp("");
           setOtpSent(false);
@@ -202,7 +202,7 @@ const UserIDPassword = () => {
 
         {editable && (
           <div className="col-span-2">
-            <CustomButton type="submit" disabled={isUpdating}>
+            <CustomButton  className="text-white" type="submit" disabled={isUpdating}>
               {isUpdating ? "Updating..." : "Save Changes"}
             </CustomButton>
           </div>

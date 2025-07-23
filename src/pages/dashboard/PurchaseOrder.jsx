@@ -28,7 +28,8 @@ const PurchaseOrder = () => {
     return items?.reduce((acc, item) => {
       const price = Number(item.price) || 0;
       const consumed = Number(item.consumed) || 0;
-      return acc + price * consumed;
+      const qty = Number(item.qty) || 0;
+      return acc + (qty - consumed) * price;
     }, 0);
   };
 
@@ -138,7 +139,7 @@ const PurchaseOrder = () => {
                   {item.description}  {item.type}
                 </td>
                 <td className="py-2 px-1 text-center">{item.qty}</td>
-                <td className="py-2 px-1 text-center">{item.consumed}</td>
+                <td className="py-2 px-1 text-center">{item.qty - item.consumed}</td>
                 <td className="py-2 px-1 text-right">
                   {formatIndianPrice(item.price)}
                 </td>

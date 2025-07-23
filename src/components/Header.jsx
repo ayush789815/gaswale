@@ -368,7 +368,10 @@ const Header = () => {
                       </button>
 
                       {showNotifyPanel && (
-                        <div ref={notifyPanelRef} className="absolute right-0 top-12 w-96 max-h-[80vh] overflow-y-auto bg-white rounded-md shadow-lg border border-gray-200 z-50">
+                        <div
+                          ref={notifyPanelRef}
+                          className="absolute right-0 top-12 w-96 max-h-[80vh] overflow-y-auto bg-white rounded-md shadow-lg border border-gray-200 z-50"
+                        >
                           <div className="px-4 py-3 border-b flex justify-between items-center bg-gray-50">
                             <h3 className="text-lg font-semibold text-gray-800">
                               {selectedNotificationId
@@ -527,13 +530,11 @@ const Header = () => {
           </div>
 
           {/* Mobile Navigation Menu */}
-          {isMobileMenuOpen && (
+        
             <div
-              className={`md:hidden overflow-hidden transform transition-all duration-500 ease-in-out ${
-                isMobileMenuOpen
-                  ? "max-h-[1000px] opacity-100 translate-y-0"
-                  : "max-h-0 opacity-0 -translate-y-2"
-              } bg-green-700 border-t border-green-500`}
+              className={`md:hidden bg-green-600 border-t border-green-500 mobile-menu-transition ${
+                isMobileMenuOpen ? "open" : ""
+              }`}
             >
               <div className="px-4 pt-2 pb-3 space-y-1">
                 <Link
@@ -543,13 +544,6 @@ const Header = () => {
                 >
                   Products
                 </Link>
-                {/* <Link
-                  to="/services"
-                  className="block text-white hover:text-green-100 hover:bg-green-800 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Services
-                </Link> */}
                 <Link
                   to="/faqs"
                   className="block text-white hover:text-green-100 hover:bg-green-800 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
@@ -557,7 +551,6 @@ const Header = () => {
                 >
                   FAQ's
                 </Link>
-
                 {/* Mobile Cart Link */}
                 <Link
                   to="/cart"
@@ -567,7 +560,6 @@ const Header = () => {
                   <ShoppingCart />
                   Cart {Number(cartData?.count) > 0 && `(${cartData?.count})`}
                 </Link>
-
                 {userLoggedIn != null ? (
                   <>
                     <Link
@@ -604,7 +596,7 @@ const Header = () => {
                 )}
               </div>
             </div>
-          )}
+         
         </nav>
 
         {/* Mobile Search Bar */}

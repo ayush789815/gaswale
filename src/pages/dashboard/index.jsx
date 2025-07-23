@@ -44,7 +44,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="max-w-[90%] mx-auto m-5">
+    <div className="max-w-[90%] mx-auto m-5 overflow-y-hidden=p">
       {/* Sidebar for desktop */}
       <div className="hidden md:flex border border-gray-800/15 rounded-md">
         <div className="w-[16rem]  p-5 border-r border-gray-800/15">

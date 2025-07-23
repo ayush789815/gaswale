@@ -35,7 +35,7 @@ const Footer = () => {
                   to="/policies"
                   className="text-green-600 hover:text-green-800 font-medium transition-colors duration-200 text-base sm:text-base py-1"
                 >
-                  Policies
+                  Privacy & Policy
                 </Link>
               </div>
 

@@ -10,3 +10,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+/* --- Mobile Menu Dropdown Animation --- */
+.mobile-menu-transition {
+  transition: max-height .8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.mobile-menu-transition.open {
+  max-height: 1000px; /* Large enough for your menu */
+  opacity: 1;
+  pointer-events: auto;
+}

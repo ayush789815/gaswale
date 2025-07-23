@@ -198,7 +198,7 @@ const Address = ({onSelectionChange}) => {
           <CustomButton onClick={() => setIsDelete(false)} variant="secondary">
             Cancel
           </CustomButton>
-          <CustomButton onClick={handleDelete}>Delete</CustomButton>
+          <CustomButton className="text-white" onClick={handleDelete}>Delete</CustomButton>
         </div>
       </CustomModal>
     </div>

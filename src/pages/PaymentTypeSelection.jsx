@@ -26,16 +26,17 @@ const PaymentTypeSelection = () => {
   const [selectedData, setSelectedData] = useState(null);
   const { state } = useLocation();
   const scheduledData = state?.scheduledData;
-  console.log(scheduledData, "scheduledData");
+  // console.log(scheduledData, "scheduledData");
   const { data: purchaseOrdersData, isLoading: purchaseOrderLoading } =
     useGetPurchaseOrderQuery({ userid: userData?.userid });
 
+    console.log(purchaseOrdersData, "purchaseOrdersData");
   const {
     data: paymentListData,
     isLoading: paymentListLoading,
     refetch,
   } = useFetchPaymentListQuery({ userid: userData?.userid });
-  console.log(paymentListData);
+  // console.log(paymentListData);
   const { data: addressListData, isLoading: addressLoading } =
     useGetAddressListQuery(userData?.userid);
 
@@ -145,8 +146,8 @@ const PaymentTypeSelection = () => {
   const calculateTotalPrice = (items) =>
     items?.reduce((acc, item) => {
       const price = Number(item.price) || 0;
-      const consumed = Number(item.consumed) || 0;
-      return acc + price * consumed;
+      const qty = Number(item.qty) || 0;
+      return acc + price * qty;
     }, 0);
 
   const activeAddress = addressListData?.data?.find(
@@ -195,10 +196,10 @@ const PaymentTypeSelection = () => {
 
           {purchaseOrderLoading ? (
             <p>Loading purchase orders...</p>
-          ) : Array.isArray(purchaseOrdersData?.data) &&
-            purchaseOrdersData.data.length > 0 ? (
+          ) : Array.isArray(purchaseOrdersData?.active) &&
+            purchaseOrdersData.active.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {purchaseOrdersData.data.map((order, idx) => (
+              {purchaseOrdersData.active.map((order, idx) => (
                 <div
                   key={idx}
                   className={`border border-gray-200 rounded-md p-4 gap-2 shadow-sm hover:shadow-md transition cursor-pointer ${
@@ -276,6 +277,12 @@ const PaymentTypeSelection = () => {
               <p className="text-sm font-medium">
                 Date: {selectedData?.podate}
               </p>
+               <p className="text-sm font-medium">
+                Quaotation Number: {selectedData?.sr_no}
+              </p>
+               <p className="text-sm font-medium">
+               Quaotation Date: {selectedData?.quotation_date}
+              </p>
             </div>
 
             <table className="w-full border-collapse">
@@ -292,16 +299,16 @@ const PaymentTypeSelection = () => {
                 {selectedData?.products?.map((item, idx) => (
                   <tr key={idx} className="border-b">
                     <td className="py-2 px-1 whitespace-pre-wrap">
-                      {item.description}
+                      {item.description} - {item.type}
                     </td>
-                    <td className="py-2 px-1 text-center">{item.consumed}</td>
                     <td className="py-2 px-1 text-center">{item.qty}</td>
+                    <td className="py-2 px-1 text-center">{item.qty - item.consumed}</td>
                     <td className="py-2 px-1 text-right">
                       {formatIndianPrice(item.price)}
                     </td>
                     <td className="py-2 px-1 text-right">
                       {formatIndianPrice(
-                        Number(item.price) * Number(item?.consumed)
+                        Number(item.price) * Number(item?.qty)
                       )}
                     </td>
                   </tr>

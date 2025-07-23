@@ -169,7 +169,7 @@ const OrderDetails = () => {
           {/* Shipping Tracking */}
           <div className="mt-8">
             <h2 className="text-lg font-medium">Shipping Tracking</h2>
-                        <p className="mt-1">Delivery Estimate: {orderData?.deliveryestimate}</p>
+                        <p className="mt-1">Delivery Estimate: {orderData?.scheduledate}</p>
             <p className="mt-1">Tracking: {orderData?.orderstatustext}</p>
           </div>
 

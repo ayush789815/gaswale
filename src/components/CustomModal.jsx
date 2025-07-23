@@ -35,8 +35,7 @@ const CustomModal = ({
     <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
-          className="fixed top-0 left-0 w-full h-full bg-black/50 z-50 flex items-center justify-center sm:items-start sm:pt-20 overflow-y-auto"
-          variants={backdropVariants}
+          className="fixed top-0 left-0 w-full h-full bg-black/50 z-50 flex items-center justify-center sm:items-start sm:pt-20  "
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -53,6 +52,7 @@ const CustomModal = ({
               relative 
               mx-2 
               sm:mx-0 
+              
               ${className}
             `}
             variants={modalVariants}
@@ -62,15 +62,14 @@ const CustomModal = ({
             onClick={(e) => e.stopPropagation()}
           >
             {showHeader || (
-              <div className="flex justify-between items-center mb-4 border-b border-gray-300 pb-2">
+              <div className="flex justify-between items-center mb-4 border-b border-gray-300 pb-2 ">
                 <X onClick={onClose} size={25} />
               </div>
             )}
             {showHeader && (
               <div className="flex justify-between items-center mb-4 border-b border-b-gray-400 pb-2">
                 <h2 className="text-lg font-semibold">{title}</h2>
-                <div                   className="text-gray-600 hover:text-gray-800 transition-colors"
->
+                <div className="text-gray-600 hover:text-gray-800 transition-colors">
                   <X onClick={onClose} size={25} />
                 </div>
               </div>
